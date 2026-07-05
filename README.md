@@ -4,6 +4,8 @@ IPTV streaming channels manager for Nextcloud.
 
 Manage and watch IPTV channels directly in Nextcloud. Add channels with streaming URLs, organize them into folders, and watch live TV with HLS video player.
 
+![Screenshot](img/screenshots/iptv.png)
+
 ## Features
 
 - Add/Edit/Delete channels with name, stream URL and logo
