@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	  xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+	<id>iptv</id>
+	<name>I P T V</name>
+	<summary>IPTV streaming channels manager</summary>
+	<description>Manage and watch IPTV channels directly in Nextcloud. Add channels with streaming URLs, organize them into folders, and watch live TV with HLS video player.</description>
+	<version>1.0.1</version>
+	<icon>img/app.svg</icon>
+	<licence>AGPL-3.0-or-later</licence>
+	<author mail="prodep@list.ru" homepage="https://kuper-spb.ru">Aleksandr Kupriyanov</author>
+	<namespace>IPTV</namespace>
+	<category>tools</category>
+	<bugs>https://kuper-spb.ru</bugs>
+	<dependencies>
+		<nextcloud min-version="34" max-version="34"/>
+	</dependencies>
+</info>
