@@ -33,6 +33,9 @@ class PageController extends Controller {
 		$csp->addAllowedMediaDomain('blob:');
 		$csp->addAllowedMediaDomain('data:');
 		$csp->addAllowedImageDomain('*');
+		$csp->addAllowedWorkerSrcDomain('*');
+		$csp->addAllowedFrameDomain('*');
+		$csp->addAllowedFrameDomain('blob:');
 		$response->setContentSecurityPolicy($csp);
 		return $response;
 	}

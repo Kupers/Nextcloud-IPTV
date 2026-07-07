@@ -66,10 +66,41 @@ class FolderMapper extends QBMapper {
 		return true;
 	}
 
+	public function findByName(string $name, string $userId): ?Folder {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from($this->getTableName())
+			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($userId)))
+			->andWhere($qb->expr()->eq('name', $qb->createNamedParameter($name)));
+		try {
+			return $this->findEntity($qb);
+		} catch (\OCP\AppFramework\Db\DoesNotExistException) {
+			return null;
+		}
+	}
+
 	public function deleteAllForUser(string $userId): void {
 		$qb = $this->db->getQueryBuilder();
 		$qb->delete($this->getTableName())
 			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($userId)));
 		$qb->executeStatement();
+	}
+
+	/**
+	 * @return Folder[]
+	 */
+	public function findAllForAllUsers(): array {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from($this->getTableName())
+			->orderBy('user_id', 'ASC')
+			->addOrderBy('id', 'ASC');
+		return $this->findEntities($qb);
+	}
+
+	public function deleteAllForAllUsers(): int {
+		$qb = $this->db->getQueryBuilder();
+		$qb->delete($this->getTableName());
+		return $qb->executeStatement();
 	}
 }

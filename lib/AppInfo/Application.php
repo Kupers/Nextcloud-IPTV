@@ -6,6 +6,7 @@ namespace OCA\IPTV\AppInfo;
 
 use OCA\IPTV\Db\ChannelMapper;
 use OCA\IPTV\Db\FolderMapper;
+use OCA\IPTV\Service\M3uParser;
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
@@ -33,6 +34,9 @@ class Application extends App implements IBootstrap {
 				$c->get(\OCP\IDBConnection::class),
 			);
 		});
+		$context->registerService(M3uParser::class, function ($c) {
+			return new M3uParser();
+		});
 		$context->registerCapability(\OCA\IPTV\Capabilities::class);
 	}
 
@@ -59,6 +63,9 @@ class Application extends App implements IBootstrap {
 		$policy->addAllowedMediaDomain('blob:');
 		$policy->addAllowedMediaDomain('data:');
 		$policy->addAllowedImageDomain('*');
+		$policy->addAllowedWorkerSrcDomain('*');
+		$policy->addAllowedFrameDomain('*');
+		$policy->addAllowedFrameDomain('blob:');
 		\OC::$server->get(IContentSecurityPolicyManager::class)
 			->addDefaultPolicy($policy);
 	}

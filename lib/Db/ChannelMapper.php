@@ -40,6 +40,24 @@ class ChannelMapper extends QBMapper {
 		$qb->executeStatement();
 	}
 
+	/**
+	 * @return Channel[]
+	 */
+	public function findAllForAllUsers(): array {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from($this->getTableName())
+			->orderBy('user_id', 'ASC')
+			->addOrderBy('id', 'ASC');
+		return $this->findEntities($qb);
+	}
+
+	public function deleteAllForAllUsers(): int {
+		$qb = $this->db->getQueryBuilder();
+		$qb->delete($this->getTableName());
+		return $qb->executeStatement();
+	}
+
 	public function find(int $id, string $userId): ?Channel {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
